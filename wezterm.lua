@@ -7,24 +7,21 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-local launch_menu = {}
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-  table.insert(launch_menu, {
-    label = 'PowerShell',
-    args = { 'powershell.exe', '-NoLogo' },
-  })
+  config.default_prog = { 'powershell', '-NoLogo' }
 end
 
 config.launch_menu = launch_menu
-config.color_scheme = 'GruvboxDarkHard'
+config.color_scheme = 'nightfox'
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.font = wezterm.font("Hack Nerd Font Mono", {weight="Regular", stretch="Normal", style="Normal"})
 config.audible_bell = 'Disabled'
 config.font_size = 11
+config.tab_bar_at_bottom = true
 config.keys = {
   {
-    key = 't',
+    key = 'w',
     mods = 'ALT',
     action = act.ActivateKeyTable {
       name = 'tab',
@@ -36,7 +33,7 @@ config.keys = {
     mods = 'ALT',
     action = act.ActivateKeyTable {
       name = 'pane',
-      one_shot = false,
+      one_shot = true,
     },
   },
   {
@@ -61,6 +58,14 @@ config.keys = {
     action = act.ActivateKeyTable {
       name = 'search',
       one_shot = false,
+    },
+  },
+  {
+    key = 'f',
+    mods = 'ALT',
+    action = act.ActivateKeyTable {
+      name = 'find',
+      one_shot = true,
     },
   },
   {
@@ -93,6 +98,16 @@ config.keys = {
     mods = 'ALT',
     action = act.ActivateTabRelative(1),
   },
+  {
+    key = '<',
+    mods = 'ALT|SHIFT',
+    action = act.MoveTabRelative(-1),
+  },
+  {
+    key = '>',
+    mods = 'ALT|SHIFT',
+    action = act.MoveTabRelative(1),
+  },
 }
 config.key_tables = {
   resize = {
@@ -123,6 +138,7 @@ config.key_tables = {
     { key = 'Escape', action = 'PopKeyTable' },
   },
   search = {
+    { key = 'Escape', action = 'PopKeyTable' },
   },
   pane = {
     { key = 'h', action = act.ActivatePaneDirection 'Left' },
@@ -141,6 +157,9 @@ config.key_tables = {
         'PopKeyTable'
     }},
     { key = 'Escape', action = 'PopKeyTable' },
+  },
+  find = {
+    { key = 'c', action = wezterm.action.ActivateCommandPalette },
   },
 }
 
