@@ -108,20 +108,24 @@ config.keys = {
     mods = 'ALT|SHIFT',
     action = act.MoveTabRelative(1),
   },
+  { key = 'h', mods = 'ALT|CTRL', action = act.AdjustPaneSize { 'Left', 3 } },
+  { key = 'l', mods = 'ALT|CTRL', action = act.AdjustPaneSize { 'Right', 3 } },
+  { key = 'k', mods = 'ALT|CTRL', action = act.AdjustPaneSize { 'Up', 3 } },
+  { key = 'j', mods = 'ALT|CTRL', action = act.AdjustPaneSize { 'Down', 3 } },
 }
 config.key_tables = {
   resize = {
-    { key = 'LeftArrow', action = act.AdjustPaneSize { 'Left', 1 } },
-    { key = 'h', action = act.AdjustPaneSize { 'Left', 1 } },
+    { key = 'LeftArrow', action = act.AdjustPaneSize { 'Left', 3 } },
+    { key = 'h', action = act.AdjustPaneSize { 'Left', 3 } },
 
-    { key = 'RightArrow', action = act.AdjustPaneSize { 'Right', 1 } },
-    { key = 'l', action = act.AdjustPaneSize { 'Right', 1 } },
+    { key = 'RightArrow', action = act.AdjustPaneSize { 'Right', 3 } },
+    { key = 'l', action = act.AdjustPaneSize { 'Right', 3 } },
 
-    { key = 'UpArrow', action = act.AdjustPaneSize { 'Up', 1 } },
-    { key = 'k', action = act.AdjustPaneSize { 'Up', 1 } },
+    { key = 'UpArrow', action = act.AdjustPaneSize { 'Up', 3 } },
+    { key = 'k', action = act.AdjustPaneSize { 'Up', 3 } },
 
-    { key = 'DownArrow', action = act.AdjustPaneSize { 'Down', 1 } },
-    { key = 'j', action = act.AdjustPaneSize { 'Down', 1 } },
+    { key = 'DownArrow', action = act.AdjustPaneSize { 'Down', 3 } },
+    { key = 'j', action = act.AdjustPaneSize { 'Down', 3 } },
 
     { key = 'Escape', action = 'PopKeyTable' },
   },
