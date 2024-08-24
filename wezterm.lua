@@ -12,13 +12,13 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 end
 
 config.launch_menu = launch_menu
---config.color_scheme = 'nightowl'
+config.color_scheme = 'Night Owl (Gogh)'
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 --config.font = wezterm.font("Hack Nerd Font Mono", {weight="Regular", stretch="Normal", style="Normal"})
 config.audible_bell = 'Disabled'
 config.font_size = 11
-config.tab_bar_at_bottom = true
+config.tab_bar_at_bottom = false
 config.keys = {
     {
         key = 'h',
