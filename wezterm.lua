@@ -15,10 +15,13 @@ config.launch_menu = launch_menu
 config.color_scheme = 'Night Owl (Gogh)'
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
---config.font = wezterm.font("Hack Nerd Font Mono", {weight="Regular", stretch="Normal", style="Normal"})
 config.audible_bell = 'Disabled'
 config.font_size = 11
 config.tab_bar_at_bottom = false
+config.font = wezterm.font {
+    family = 'JetBrains Mono',
+    weight = 'DemiBold',
+}
 config.keys = {
     {
         key = 'h',
@@ -69,11 +72,27 @@ config.keys = {
     { key = 'f', mods = 'ALT', action = act.ActivateTab(2) },
     { key = 'f', mods = 'ALT', action = act.ActivateTab(3) },
     { key = 'i', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
-    { key = 'u', mods = 'ALT', action = act.SplitPane {
-        direction = 'Right',
-        size = { Percent = 50 },
-    }},
-    { key = 'q', mods = 'ALT', action = act.CloseCurrentTab { confirm = false } },
+    { key = 'u', mods = 'ALT', action = wezterm.action_callback(function(win, pane)
+        local right_pane = pane:tab():get_pane_direction('Right')
+        local left_pane = pane:tab():get_pane_direction('Left')
+        if right_pane == nil and left_pane == nil then
+            pane:split {
+                direction = 'Left',
+                size = 0.35,
+            }
+        elseif right_pane == nil then
+            left_pane:split {
+                direction = 'Bottom',
+                size = 0.5,
+            }
+        else
+            pane:split {
+                direction = 'Bottom',
+                size = 0.5,
+            }
+        end
+    end)},
+    { key = 'q', mods = 'ALT', action = act.CloseCurrentPane { confirm = false } },
 }
 
 return config
