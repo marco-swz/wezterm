@@ -12,15 +12,16 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 end
 
 config.launch_menu = launch_menu
-config.color_scheme = 'Night Owl (Gogh)'
+--config.color_scheme = 'Night Owl (Gogh)'
+
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.audible_bell = 'Disabled'
-config.font_size = 11
+config.font_size = 13
 config.tab_bar_at_bottom = false
+config.freetype_load_target = "Light"
 config.font = wezterm.font {
-    family = 'JetBrains Mono',
-    weight = 'DemiBold',
+    family = 'Terminess Nerd Font',
 }
 config.keys = {
     {
