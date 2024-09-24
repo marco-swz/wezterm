@@ -12,7 +12,9 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 end
 
 config.launch_menu = launch_menu
---config.color_scheme = 'Night Owl (Gogh)'
+--config.color_scheme = 'Night Owl (Gogh)
+--config.color_scheme = 'Grayscale Dark (base16)'
+config.color_scheme = 'Deafened (terminal.sexy)'
 
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
