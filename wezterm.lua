@@ -14,16 +14,20 @@ end
 config.launch_menu = launch_menu
 --config.color_scheme = 'Night Owl (Gogh)
 --config.color_scheme = 'Grayscale Dark (base16)'
-config.color_scheme = 'Deafened (terminal.sexy)'
+--config.color_scheme = 'Deafened (terminal.sexy)'
+config.color_scheme = 'Kanagawa (Gogh)'
 
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.audible_bell = 'Disabled'
 config.font_size = 13
 config.tab_bar_at_bottom = false
-config.freetype_load_target = "Light"
+--config.freetype_load_target = "Light"
 config.font = wezterm.font {
-    family = 'Terminess Nerd Font',
+    --family = 'Terminess Nerd Font',
+    --family = 'Mononoki Nerd Font',
+    --family = 'Hack Nerd Font',
+    family = 'Consolas',
 }
 config.keys = {
     {
