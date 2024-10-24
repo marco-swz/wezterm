@@ -1,5 +1,6 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
+local mux = wezterm.mux
 
 local config = {}
 
@@ -79,6 +80,7 @@ config.keys = {
     { key = 'f', mods = 'ALT', action = act.ActivateTab(2) },
     { key = 'f', mods = 'ALT', action = act.ActivateTab(3) },
     { key = 'i', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
+    --{ key = 'Backspace', mods = 'CTRL', action = act.SendKey {key = 'w', mods = 'CTRL'} },
     { key = 'u', mods = 'ALT', action = wezterm.action_callback(function(win, pane)
         local right_pane = pane:tab():get_pane_direction('Right')
         local left_pane = pane:tab():get_pane_direction('Left')
@@ -101,5 +103,13 @@ config.keys = {
     end)},
     { key = 'q', mods = 'ALT', action = act.CloseCurrentPane { confirm = false } },
 }
+
+wezterm.on('gui-startup', function(cmd)
+    local tab, pane, window = mux.spawn_window(cmd or {})
+    pane:split { size = 0.85 }
+    local tab, pane, window = window:spawn_tab {}
+    pane:split { size = 0.85 }
+    window:gui_window():maximize()
+end)
 
 return config
