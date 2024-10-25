@@ -102,14 +102,85 @@ config.keys = {
         end
     end)},
     { key = 'q', mods = 'ALT', action = act.CloseCurrentPane { confirm = false } },
+    {
+        key = 'y',
+        mods = 'ALT',
+        action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' },
+    },
 }
 
+wezterm.on('update-right-status', function(window, pane)
+    window:set_right_status(window:active_workspace())
+end)
+
 wezterm.on('gui-startup', function(cmd)
-    local tab, pane, window = mux.spawn_window(cmd or {})
-    pane:split { size = 0.85 }
-    local tab, pane, window = window:spawn_tab {}
-    pane:split { size = 0.85 }
-    window:gui_window():maximize()
+    local split_ratio = 0.3
+    local is_work = false
+    local workspace = nil
+    if cmd then
+        is_work = cmd.args[1] == "work"
+        if is_work then
+            workspace = cmd.args[2]
+        end
+    end
+
+    local tab, pane_shell, window_coding = mux.spawn_window({workspace = "coding" })
+    window_coding:gui_window():maximize()
+    tab:set_title "shell"
+    local tab, pane_code, window = window_coding:spawn_tab {}
+    tab:set_title "code"
+    mux.set_active_workspace("coding")
+    wezterm.sleep_ms(100)
+    pane_shell:split { size = split_ratio, direction = "Left" }
+    pane_code:split { 
+        size = split_ratio,
+        direction = "Left",
+    }
+    pane_shell:activate()
+    pane_code:activate()
+
+    if is_work then
+        local tab, pane_shell, window_pps = mux.spawn_window({
+            workspace = "pps",
+            cwd = "C:\\Users\\U681181\\coding\\pps",
+        })
+        tab:set_title "shell"
+        local tab, pane_code, window = window_pps:spawn_tab {}
+        tab:set_title "code"
+        mux.set_active_workspace("pps")
+        wezterm.sleep_ms(100)
+        pane_shell:split { size = split_ratio, direction = "Left" }
+        local pane = pane_code:split { 
+            size = split_ratio,
+            cwd = "C:\\Users\\U681181\\coding\\pps\\js\\lib\\helium-js",
+            direction = "Left",
+        }
+        pane:send_text 'rollup -c -w\r\n'
+        pane_code:send_text 'nvim\r\n'
+        pane_shell:activate()
+        pane_code:activate()
+
+        local tab, pane_shell, window_vawa = mux.spawn_window({ 
+            workspace = "vawa",
+            cwd = "C:\\Users\\U681181\\coding\\vawa",
+        })
+        local tab, pane_code, window = window_vawa:spawn_tab {}
+        tab:set_title "code"
+        mux.set_active_workspace("vawa")
+        wezterm.sleep_ms(100)
+        pane_shell:activate()
+        pane_shell:split { size = split_ratio, direction = "Left" }
+        pane_code:split { 
+            size = split_ratio,
+            cwd = "C:\\Users\\U681181\\coding\\vawa",
+            direction = "Left",
+        }
+        pane_code:send_text 'nvim\r\n'
+        pane_shell:activate()
+        pane_code:activate()
+
+        mux.set_active_workspace(workspace)
+    end
 end)
 
 return config
