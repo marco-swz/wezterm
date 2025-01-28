@@ -21,6 +21,7 @@ config.color_scheme = 'Kanagawa (Gogh)'
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.audible_bell = 'Disabled'
+config.disable_default_key_bindings = true
 config.font_size = 13
 config.tab_bar_at_bottom = false
 --config.freetype_load_target = "Light"
@@ -71,17 +72,16 @@ config.keys = {
         mods = 'ALT|SHIFT',
         action = act.MoveTabRelative(1),
     },
-    { key = 'h', mods = 'ALT|CTRL', action = act.AdjustPaneSize { 'Left', 3 } },
-    { key = 'l', mods = 'ALT|CTRL', action = act.AdjustPaneSize { 'Right', 3 } },
-    { key = 'k', mods = 'ALT|CTRL', action = act.AdjustPaneSize { 'Up', 3 } },
-    { key = 'j', mods = 'ALT|CTRL', action = act.AdjustPaneSize { 'Down', 3 } },
-    { key = 's', mods = 'ALT', action = act.ActivateTab(0) },
-    { key = 'd', mods = 'ALT', action = act.ActivateTab(1) },
-    { key = 'f', mods = 'ALT', action = act.ActivateTab(2) },
-    { key = 'f', mods = 'ALT', action = act.ActivateTab(3) },
-    { key = 'i', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
-    --{ key = 'Backspace', mods = 'CTRL', action = act.SendKey {key = 'w', mods = 'CTRL'} },
-    { key = 'u', mods = 'ALT', action = wezterm.action_callback(function(win, pane)
+    { key = 'h', mods = 'ALT|SHIFT', action = act.AdjustPaneSize { 'Left', 3 } },
+    { key = 'l', mods = 'ALT|SHIFT', action = act.AdjustPaneSize { 'Right', 3 } },
+    { key = 'k', mods = 'ALT|SHIFT', action = act.AdjustPaneSize { 'Up', 3 } },
+    { key = 'j', mods = 'ALT|SHIFT', action = act.AdjustPaneSize { 'Down', 3 } },
+    { key = 'u', mods = 'ALT', action = act.ActivateTab(0) },
+    { key = 'i', mods = 'ALT', action = act.ActivateTab(1) },
+    { key = 'o', mods = 'ALT', action = act.ActivateTab(2) },
+    { key = 'p', mods = 'ALT', action = act.ActivateTab(3) },
+    { key = 'n', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
+    { key = 'm', mods = 'ALT', action = wezterm.action_callback(function(win, pane)
         local right_pane = pane:tab():get_pane_direction('Right')
         local left_pane = pane:tab():get_pane_direction('Left')
         if right_pane == nil and left_pane == nil then
@@ -101,12 +101,100 @@ config.keys = {
             }
         end
     end)},
-    { key = 'q', mods = 'ALT', action = act.CloseCurrentPane { confirm = false } },
+    { key = 'n', mods = 'ALT|SHIFT', action = act.CloseCurrentTab { confirm = false } },
+    { key = 'm', mods = 'ALT|SHIFT', action = act.CloseCurrentPane { confirm = false } },
     {
         key = 'y',
         mods = 'ALT',
         action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' },
     },
+    {
+        key = '\'',
+        mods = 'ALT',
+        action = act.ActivateKeyTable {
+          name = 'locked',
+          replace_current = true,
+          one_shot = false,
+        },
+    },
+    {
+        key = 'y',
+        mods = 'ALT|SHIFT',
+        action = act.DetachDomain 'CurrentPaneDomain',
+    },
+}
+
+config.key_tables = {
+    locked = {
+        {
+            key = '\'',
+            mods = 'ALT',
+            action = act.PopKeyTable,
+        },
+        {
+            key = 'h',
+            mods = 'ALT',
+            action = act.DisableDefaultAssignment,
+        },
+        {
+            key = 'l',
+            mods = 'ALT',
+            action = act.DisableDefaultAssignment,
+        },
+        {
+            key = 'j',
+            mods = 'ALT',
+            action = act.DisableDefaultAssignment,
+        },
+        {
+            key = 'k',
+            mods = 'ALT',
+            action = act.DisableDefaultAssignment,
+        },
+        {
+            key = ',',
+            mods = 'ALT',
+            action = act.ActivateTabRelative(-1),
+                action = act.DisableDefaultAssignment,
+        },
+        {
+            key = '.',
+            mods = 'ALT',
+            action = act.DisableDefaultAssignment,
+        },
+        {
+            key = '<',
+            mods = 'ALT|SHIFT',
+            action = act.DisableDefaultAssignment,
+        },
+        {
+            key = '>',
+            mods = 'ALT|SHIFT',
+            action = act.DisableDefaultAssignment,
+        },
+        { key = 'h', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
+        { key = 'l', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
+    { key = 'k', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
+    { key = 'j', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
+    { key = 'u', mods = 'ALT', action = act.DisableDefaultAssignment },
+    { key = 'i', mods = 'ALT', action = act.DisableDefaultAssignment },
+    { key = 'o', mods = 'ALT', action = act.DisableDefaultAssignment },
+    { key = 'p', mods = 'ALT', action = act.DisableDefaultAssignment },
+    { key = 'n', mods = 'ALT', action = act.DisableDefaultAssignment },
+    { key = 'm', mods = 'ALT', action = act.DisableDefaultAssignment },
+    { key = 'n', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
+    { key = 'm', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
+    {
+        key = 'y',
+        mods = 'ALT',
+        action = act.DisableDefaultAssignment,
+    },
+    {
+        key = 'y',
+        mods = 'ALT|SHIFT',
+        action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' },
+    },
+    }
 }
 
 wezterm.on('update-right-status', function(window, pane)
@@ -139,48 +227,6 @@ wezterm.on('gui-startup', function(cmd)
     pane_shell:activate()
     pane_code:activate()
 
-    if is_work then
-        local tab, pane_shell, window_pps = mux.spawn_window({
-            workspace = "pps",
-            cwd = "C:\\Users\\U681181\\coding\\pps",
-        })
-        tab:set_title "shell"
-        local tab, pane_code, window = window_pps:spawn_tab {}
-        tab:set_title "code"
-        mux.set_active_workspace("pps")
-        wezterm.sleep_ms(100)
-        pane_shell:split { size = split_ratio, direction = "Left" }
-        local pane = pane_code:split { 
-            size = split_ratio,
-            cwd = "C:\\Users\\U681181\\coding\\pps\\js\\lib\\helium-js",
-            direction = "Left",
-        }
-        pane:send_text 'rollup -c -w\r\n'
-        pane_code:send_text 'nvim\r\n'
-        pane_shell:activate()
-        pane_code:activate()
-
-        local tab, pane_shell, window_vawa = mux.spawn_window({ 
-            workspace = "vawa",
-            cwd = "C:\\Users\\U681181\\coding\\vawa",
-        })
-        local tab, pane_code, window = window_vawa:spawn_tab {}
-        tab:set_title "code"
-        mux.set_active_workspace("vawa")
-        wezterm.sleep_ms(100)
-        pane_shell:activate()
-        pane_shell:split { size = split_ratio, direction = "Left" }
-        pane_code:split { 
-            size = split_ratio,
-            cwd = "C:\\Users\\U681181\\coding\\vawa",
-            direction = "Left",
-        }
-        pane_code:send_text 'nvim\r\n'
-        pane_shell:activate()
-        pane_code:activate()
-
-        mux.set_active_workspace(workspace)
-    end
 end)
 
 return config
