@@ -134,66 +134,113 @@ config.key_tables = {
         {
             key = 'h',
             mods = 'ALT',
-            action = act.DisableDefaultAssignment,
+            action = act.SendKey({ key = 'h', mods = 'ALT' }),
         },
         {
             key = 'l',
             mods = 'ALT',
-            action = act.DisableDefaultAssignment,
+            action = act.SendKey({ key = 'l', mods = 'ALT' }),
         },
         {
             key = 'j',
             mods = 'ALT',
-            action = act.DisableDefaultAssignment,
+            action = act.SendKey({ key = 'j', mods = 'ALT' }),
         },
         {
             key = 'k',
             mods = 'ALT',
-            action = act.DisableDefaultAssignment,
+            action = act.SendKey({ key = 'k', mods = 'ALT' }),
         },
         {
             key = ',',
             mods = 'ALT',
-            action = act.ActivateTabRelative(-1),
-                action = act.DisableDefaultAssignment,
+            action = act.SendKey({ key = ',', mods = 'ALT' }),
         },
         {
             key = '.',
             mods = 'ALT',
-            action = act.DisableDefaultAssignment,
+            action = act.SendKey({ key = '.', mods = 'ALT' }),
         },
         {
             key = '<',
             mods = 'ALT|SHIFT',
-            action = act.DisableDefaultAssignment,
+            action = act.SendKey({ key = '<', mods = 'ALT|SHIFT' }),
         },
         {
             key = '>',
             mods = 'ALT|SHIFT',
-            action = act.DisableDefaultAssignment,
+            action = act.SendKey({ key = '>', mods = 'ALT|SHIFT' }),
         },
-        { key = 'h', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
-        { key = 'l', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
-    { key = 'k', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
-    { key = 'j', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
-    { key = 'u', mods = 'ALT', action = act.DisableDefaultAssignment },
-    { key = 'i', mods = 'ALT', action = act.DisableDefaultAssignment },
-    { key = 'o', mods = 'ALT', action = act.DisableDefaultAssignment },
-    { key = 'p', mods = 'ALT', action = act.DisableDefaultAssignment },
-    { key = 'n', mods = 'ALT', action = act.DisableDefaultAssignment },
-    { key = 'm', mods = 'ALT', action = act.DisableDefaultAssignment },
-    { key = 'n', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
-    { key = 'm', mods = 'ALT|SHIFT', action = act.DisableDefaultAssignment },
-    {
-        key = 'y',
-        mods = 'ALT',
-        action = act.DisableDefaultAssignment,
-    },
-    {
-        key = 'y',
-        mods = 'ALT|SHIFT',
-        action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' },
-    },
+        {
+            key = 'h',
+            mods = 'ALT|SHIFT',
+            action = act.SendKey({ key = 'h', mods = 'ALT|SHIFT' }),
+        },
+        {
+            key = 'l',
+            mods = 'ALT|SHIFT',
+            action = act.SendKey({ key = 'l', mods = 'ALT|SHIFT' }),
+        },
+        {
+            key = 'k',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'k', mods = 'ALT' })
+        },
+        {
+            key = 'j',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'j', mods = 'ALT' })
+        },
+        {
+            key = 'u',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'u', mods = 'ALT' })
+        },
+        {
+            key = 'o',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'o', mods = 'ALT' })
+        },
+        {
+            key = 'i',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'i', mods = 'ALT' })
+        },
+        {
+            key = 'p',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'p', mods = 'ALT' })
+        },
+        {
+            key = 'n',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'n', mods = 'ALT' }),
+        },
+        {
+            key = 'n',
+            mods = 'ALT|SHIFT',
+            action = act.SendKey({ key = 'n', mods = 'ALT|SHIFT' }),
+        },
+        {
+            key = 'm',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'm', mods = 'ALT' }),
+        },
+        {
+            key = 'm',
+            mods = 'ALT|SHIFT',
+            action = act.SendKey({ key = 'm', mods = 'ALT|SHIFT' }),
+        },
+        {
+            key = 'y',
+            mods = 'ALT',
+            action = act.SendKey({ key = 'y', mods = 'ALT' }),
+        },
+        {
+            key = 'y',
+            mods = 'ALT|SHIFT',
+            action = act.SendKey({ key = 'y', mods = 'ALT|SHIFT' }),
+        },
     }
 }
 
