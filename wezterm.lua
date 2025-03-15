@@ -15,11 +15,11 @@ end
 config.launch_menu = launch_menu
 config.color_scheme = 'Kanagawa (Gogh)'
 
-config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.audible_bell = 'Disabled'
 config.disable_default_key_bindings = true
-config.font_size = 11
+config.hide_mouse_cursor_when_typing = false
+config.font_size = 12
 config.tab_bar_at_bottom = false
 config.window_decorations = "TITLE"
 config.dpi = 96.0
@@ -107,9 +107,9 @@ config.keys = {
         key = '\'',
         mods = 'ALT',
         action = act.ActivateKeyTable {
-          name = 'locked',
-          replace_current = true,
-          one_shot = false,
+            name = 'locked',
+            replace_current = true,
+            one_shot = false,
         },
     },
     {
@@ -240,7 +240,11 @@ config.key_tables = {
 }
 
 wezterm.on('update-right-status', function(window, pane)
-    window:set_right_status(window:active_workspace())
+    local name = window:active_key_table()
+    if name then
+        name = '[' .. name .. '] '
+    end
+    window:set_right_status((name or '') .. window:active_workspace())
 end)
 
 -- wezterm.on('gui-startup', function(cmd)
